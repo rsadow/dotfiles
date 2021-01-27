@@ -108,10 +108,7 @@ set updatetime=300
 set shortmess+=c
 set signcolumn=yes
 
-colorscheme nord
 " Themeing
-hi Comment gui=italic cterm=italic                      " italic comments
-hi SpellBad guifg=NONE gui=bold,undercurl               " misspelled words
 
 function! s:ReturnHighlightTerm(group, term)
    " Store output of group to variable
@@ -141,20 +138,23 @@ function! s:hi(group, guifg, guibg, attr)
     endif
 endfunction
 
-" se cul
-" hi clear CursorLine
 
-let s:fg = s:ReturnHighlightTerm('Normal', 'guifg')
 let s:bg = '#282d37'
 
+colorscheme nord
+hi Comment gui=italic cterm=italic
+hi SpellBad guifg=NONE gui=bold,undercurl
 call s:hi('EndOfBuffer', s:bg, "", "")
-call s:hi("Normal", s:fg, s:bg, "NONE" )
+call s:hi("Normal", "", s:bg, "NONE" )
 call s:hi("DiffAdd", "", s:bg,"")
 call s:hi("DiffChange", "", s:bg, "")
 call s:hi("DiffDelete", "", s:bg, "")
 call s:hi("DiffText", "", s:bg, "")
 call s:hi("FoldColumn", "", s:bg, "")
 call s:hi("SignColumn", "", s:bg, "")
+call s:hi("VertSplit", "", s:bg, "")
+silent! call s:hi('LspCxxHlSymClass', g:terminal_color_4, "", "bold")
+silent! call s:hi('LspCxxHlSymNamespace', g:terminal_color_14, "", "")
 "}}}
 
 " ======================== Plugin Configurations ======================== "{{{
@@ -294,7 +294,7 @@ let g:fzf_tags_command = 'ctags -R'
 
 let $FZF_DEFAULT_OPTS ="--layout=reverse --inline-info --preview-window=up:70% --prompt='∼ ' --pointer='▶' --marker='✓'
     \ --color='border:". g:terminal_color_0 . ",bg+:". s:bg . ",pointer:". g:terminal_color_9 ."'"
-let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!.clangd/**' --glob '!**/cmake-build**/**' --glob '!bin/**'"
+let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!.clangd/**' --glob '!**/cmake-build**/**' --glob '!**/bin/**'"
 
 " nnn
 let g:nnn#layout = { 'window': { 'width': 0.3, 'height': 0.7 } }
@@ -373,7 +373,7 @@ command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
 
 " advanced grep(faster with preview)
 function! RipgrepFzf(query, fullscreen)
-    let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+    let command_fmt = "rg --column --line-number --no-heading --color=always --smart-case %s || true "
     let initial_command = printf(command_fmt, shellescape(a:query))
     let reload_command = printf(command_fmt, '{q}')
     let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command] }
@@ -526,8 +526,4 @@ command! -bang -nargs=* LMConfig
 
 
 "}}}
-
-
-call s:hi('LspCxxHlSymClass', g:terminal_color_4, "", "bold")
-call s:hi('LspCxxHlSymNamespace', g:terminal_color_14, "", "")
 
