@@ -27,6 +27,7 @@ Plug 'morhetz/gruvbox'
 Plug 'bagrat/vim-buffet'
 Plug 'bfrg/vim-cpp-modern'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'mhinz/vim-signify'
 "}}}
 
 " ================= Functionalities ================= "{{{
@@ -36,24 +37,10 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }     " fzf itself
 Plug 'junegunn/fzf.vim'                                 " fuzzy search integration
 Plug 'mcchrish/nnn.vim'
 Plug 'voldikss/vim-floaterm'
-" Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/remote', 'do': ':UpdateRemotePlugins' }
-
-"Plug 'SirVer/ultisnips'                                 " snippets manager
-"Plug 'honza/vim-snippets'                               " actual snippets
-" Plug 'Yggdroot/indentLine'                              " show indentation lines
-"Plug 'tpope/vim-liquid'                                 " liquid language support
-"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}  " better python
 Plug 'tpope/vim-commentary'                             " better commenting
 Plug 'mhinz/vim-startify'                               " cool start up screen
-"Plug 'tpope/vim-fugitive'                               " git support
 Plug 'psliwka/vim-smoothie'                             " some very smooth ass scrolling
-"Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
-"Plug 'tpope/vim-eunuch'                                 " run common Unix commands inside Vim
-"Plug 'dart-lang/dart-vim-plugin'
-"Plug 'machakann/vim-sandwich'                           " make sandwiches
 Plug 'christoomey/vim-tmux-navigator'                   " seamless vim and tmux navigation
-"Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-"Plug 'TovarishFin/vim-solidity'
 call plug#end()
 
 "}}}
@@ -71,7 +58,6 @@ set fillchars+=vert:\▏                                  " requires a patched n
 set wrap breakindent                                    " wrap long lines to the width set by tw
 set encoding=utf-8                                      " text encoding
 set number                                              " enable numbers on the left
-" set relativenumber                                      " current line is 0
 set title                                               " tab title as file name
 set noshowmode                                          " dont show current mode below statusline
 set noshowcmd                                           " to get rid of display of last command
@@ -109,12 +95,9 @@ set shortmess+=c
 set signcolumn=yes
 
 " Themeing
-
 function! s:ReturnHighlightTerm(group, term)
-   " Store output of group to variable
    let output = execute('hi ' . a:group)
 
-   " Find the term we're looking for
    return matchstr(output, a:term.'=\zs\S*')
 endfunction
 
@@ -141,20 +124,22 @@ endfunction
 
 let s:bg = '#282d37'
 
-colorscheme nord
-hi Comment gui=italic cterm=italic
-hi SpellBad guifg=NONE gui=bold,undercurl
-call s:hi('EndOfBuffer', s:bg, "", "")
-call s:hi("Normal", "", s:bg, "NONE" )
-call s:hi("DiffAdd", "", s:bg,"")
-call s:hi("DiffChange", "", s:bg, "")
-call s:hi("DiffDelete", "", s:bg, "")
-call s:hi("DiffText", "", s:bg, "")
-call s:hi("FoldColumn", "", s:bg, "")
-call s:hi("SignColumn", "", s:bg, "")
-call s:hi("VertSplit", "", s:bg, "")
-silent! call s:hi('LspCxxHlSymClass', g:terminal_color_4, "", "bold")
-silent! call s:hi('LspCxxHlSymNamespace', g:terminal_color_14, "", "")
+colorscheme dracula
+" custom nord colors
+" call s:hi('Comment', '', '', 'italic')
+" call s:hi('SpellBad', 'NONE', '', 'bold,undercurl')
+" call s:hi('EndOfBuffer', s:bg, '', '')
+call s:hi('Normal', '', s:bg, 'NONE' )
+" call s:hi('DiffAdd', '', s:bg,'')
+" call s:hi('DiffChange', '', s:bg, '')
+" call s:hi('DiffDelete', '', s:bg, '')
+" call s:hi('DiffText', '', s:bg, '')
+" call s:hi('FoldColumn', '', s:bg, '')
+" call s:hi('SignColumn', s:bg, s:bg, '')
+" call s:hi('VertSplit', '', s:bg, '')
+" call s:hi('ColorColumn', s:bg, s:bg, '')
+silent! call s:hi('LspCxxHlSymClass', g:terminal_color_4, '', 'bold')
+silent! call s:hi('LspCxxHlSymNamespace', g:terminal_color_14, '', '')
 "}}}
 
 " ======================== Plugin Configurations ======================== "{{{
@@ -165,7 +150,7 @@ let g:omni_sql_no_default_maps = 1                      " disable sql omni compl
 let g:loaded_python_provider = 0
 let g:loaded_perl_provider = 0
 let g:loaded_ruby_provider = 0
-let g:python3_host_prog = expand('~/env/bin/python3')
+let g:python3_host_prog = !empty($CUSTOM_PYTHON3) ? expand($CUSTOM_PYTHON3) : expand('/usr/bin/python3')
 
 " Airline
 " let g:airline_theme='onedar '
@@ -280,9 +265,6 @@ let g:rainbow_active = 0
 " tmux navigator
 let g:tmux_navigator_no_mappings = 1
 
-" semshi settings
-let g:semshi#error_sign	= v:false                       " let ms python lsp handle this
-
 "" FZF
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -350,9 +332,6 @@ autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
-
-" python renaming
-autocmd FileType python nnoremap <leader>rn :Semshi rename <CR>
 
 " format with available file format formatter
 command! -nargs=0 Format :call CocAction('format')
