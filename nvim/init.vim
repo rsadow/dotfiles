@@ -495,6 +495,9 @@ nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
 " nnn mappings
 nnoremap <leader>e :FloatermNew nnn <CR>
 
+tnoremap <Esc> <C-\><C-n>
+tnoremap <M-[> <Esc>
+
 function! s:MpcPrev(a)
 endfunction
 
