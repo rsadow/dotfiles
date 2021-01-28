@@ -124,22 +124,23 @@ endfunction
 
 let s:bg = '#282d37'
 
-colorscheme dracula
-" custom nord colors
-" call s:hi('Comment', '', '', 'italic')
-" call s:hi('SpellBad', 'NONE', '', 'bold,undercurl')
-" call s:hi('EndOfBuffer', s:bg, '', '')
+" colorscheme dracula
+colorscheme nord
+call s:hi('Comment', '', '', 'italic')
+call s:hi('SpellBad', 'NONE', '', 'bold,undercurl')
+call s:hi('EndOfBuffer', s:bg, '', '')
 call s:hi('Normal', '', s:bg, 'NONE' )
-" call s:hi('DiffAdd', '', s:bg,'')
-" call s:hi('DiffChange', '', s:bg, '')
-" call s:hi('DiffDelete', '', s:bg, '')
-" call s:hi('DiffText', '', s:bg, '')
-" call s:hi('FoldColumn', '', s:bg, '')
-" call s:hi('SignColumn', s:bg, s:bg, '')
-" call s:hi('VertSplit', '', s:bg, '')
-" call s:hi('ColorColumn', s:bg, s:bg, '')
+call s:hi('DiffAdd', '', s:bg,'')
+call s:hi('DiffChange', '', s:bg, '')
+call s:hi('DiffDelete', '', s:bg, '')
+call s:hi('DiffText', '', s:bg, '')
+call s:hi('FoldColumn', '', s:bg, '')
+call s:hi('SignColumn', '', s:bg, '')
+call s:hi('VertSplit', '', s:bg, '')
 silent! call s:hi('LspCxxHlSymClass', g:terminal_color_4, '', 'bold')
 silent! call s:hi('LspCxxHlSymNamespace', g:terminal_color_14, '', '')
+
+let g:signify_sign_show_count = 0
 "}}}
 
 " ======================== Plugin Configurations ======================== "{{{
@@ -193,7 +194,6 @@ let g:coc_global_extensions = [
             \'coc-prettier',
             \'coc-xml',
             \'coc-syntax',
-            \'coc-git',
             \'coc-marketplace',
             \'coc-highlight',
             \'coc-explorer',
@@ -435,7 +435,7 @@ au FileType markdown nmap <leader>m :MarkdownPreview<CR>
 nnoremap <silent> <leader>f :Files<CR>
 nmap <leader>b :Buffers<CR>
 nmap <leader>c :Commands<CR>
-nmap <leader>t :BTags<CR>
+" nmap <leader>t :BTags<CR>
 nmap <leader>/ :Rg<CR>
 nmap <C-a> :Rg <C-R><C-W><CR>
 nmap <leader>gc :Commits<CR>
@@ -477,6 +477,8 @@ nmap <leader>jy <Plug>(coc-type-definition)
 nmap <leader>ji <Plug>(coc-implementation)
 nmap <leader>jr <Plug>(coc-references)
 
+nmap <leader>jh :CocCommand clangd.switchSourceHeader<CR>
+
 " other coc actions
 xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
 nmap <leader>a :CocCommand actions.open<CR>
@@ -498,11 +500,20 @@ nnoremap <leader>e :FloatermNew nnn <CR>
 function! s:MpcPrev(a)
 endfunction
 
-command! -bang -nargs=* LMConfig
-            \ call fzf#run(fzf#wrap('lmconfig',
-            \ {'source':'svn blame /var/fpwork/rsadowsk/workspace/moam_trunk/moam/oam.configdelete.sh',
+command! -bang -nargs=* SVNBlame
+            \ call fzf#run(fzf#wrap('svnblame',
+            \ {'source':'svn blame ' . expand('%:p'),
             \ 'sink': function('s:MpcPrev')}, 0))
 
+let g:floaterm_gitcommit='floaterm'
+let g:floaterm_autoinsert=1
+let g:floaterm_width=0.8
+let g:floaterm_height=0.8
+let g:floaterm_wintitle=0
+let g:floaterm_autoclose=1
 
+nmap <leader>tg :FloatermNew lazygit<CR>
+nmap <leader>tt :FloatermNew --wintype=normal --height=16<CR>
+nnoremap <silent> <F8> :FloatermToggle<CR>
 "}}}
 
