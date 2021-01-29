@@ -31,7 +31,8 @@ Plug 'mhinz/vim-signify'
 "}}}
 
 " ================= Functionalities ================= "{{{
-
+" Plug 'liuchengxu/vim-which-key'
+Plug 'justinmk/vim-sneak'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}         " LSP and more
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }     " fzf itself
 Plug 'junegunn/fzf.vim'                                 " fuzzy search integration
@@ -495,7 +496,7 @@ nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
 
 " nnn mappings
-nnoremap <leader>e :FloatermNew nnn <CR>
+nnoremap <leader>e :CocCommand explorer<CR>
 
 tnoremap <Esc> <C-\><C-n>
 tnoremap <M-[> <Esc>
@@ -518,5 +519,29 @@ let g:floaterm_autoclose=1
 nmap <leader>tg :FloatermNew lazygit<CR>
 nmap <leader>tt :FloatermNew --wintype=normal --height=16<CR>
 nnoremap <silent> <F8> :FloatermToggle<CR>
+
+
+let g:sneak#label = 1
+let g:sneak#prompt = '❯ '
+highlight! link Sneak Search
+highlight! link SneakScope WarningMsg
+
+" nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+" let g:which_key_use_floating_win = 0
+" " let g:which_key_disable_default_offset = 1
+
+" highlight default link WhichKey          Number
+" highlight default link WhichKeySeperator String
+" highlight default link WhichKeyGroup     Identifier
+" highlight default link WhichKeyDesc      Function
+
+" " autocmd! FileType which_key
+" " autocmd  FileType which_key set laststatus=0 noshowmode noruler
+" "   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode rule
+" let g:which_key_map =  {}
+" let g:which_key_sep = '→'
+" set timeoutlen=500
+
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 "}}}
 

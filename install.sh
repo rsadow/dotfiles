@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES=$(dirname $0)
+DOTFILES="$HOME/.dotfiles"
 
 success=`tput setaf 2`
 error=`tput setaf 1`
@@ -55,4 +55,5 @@ print "$cmd" "+ setup symlinks"
 
 #setup nvim
 ln -sf "$DOTFILES"/nvim/init.vim "$HOME"/.config/nvim/init.vim
+ln -sf "$DOTFILES"/nvim/coc-settings.json "$HOME"/.config/nvim/coc-settings.json
 

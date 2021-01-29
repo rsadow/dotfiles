@@ -1,5 +1,4 @@
 {
-  // normal settings
   "coc.preferences.colorSupport": true,
   "coc.preferences.snippetStatusText": "Ⓢ ",
   "coc.preferences.formatOnSaveFiletypes": [
@@ -13,7 +12,6 @@
     "dart"
   ],
 
-  // suggest settings
   "suggest.noselect": false,
   "suggest.detailField": "abbr",
   "suggest.snippetIndicator": "",
@@ -49,7 +47,6 @@
     "default": "\uf29c"
   },
 
-  // diagnostic settings
   "diagnostic.displayByAle": false,
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.errorSign": "✘",
@@ -62,10 +59,8 @@
   "diagnostic.virtualText": true,
   "diagnostic.enableMessage": "never",
 
-  // list settings
   "list.source.grep.command": "rg",
 
-  // git settings
   "git.signOffset": 9999999,
   "git.topRemovedSign.text": "▌",
   "git.changeRemovedSign.text": "▌",
@@ -73,20 +68,14 @@
   "git.addedSign.text": "▌",
   "git.changedSign.text": "▌",
 
-  // other stuff (language specific)
   "python.autoComplete.addBrackets": true,
   "python.jediEnabled": false,
   "html.autoClosingTags": true,
 
   "clangd.semanticHighlighting": true,
 
-  "explorer.width": 60,
-  "explorer.buffer.root.template": "[icon & 1] OPEN FILES",
-  "explorer.file.root.template": "[icon & 1] PROJECT ([root])",
-  "explorer.file.child.template": "[git | 2] [selection | clip | 1] [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][modified][readonly] [linkIcon & 1][link growRight 1 omitCenter 5]",
-  "explorer.file.showHiddenFiles": true,
-  "explorer.file.autoReveal": false,
-  "explorer.icon.enableVimDevicons": false,
+  "explorer.width": 50,
+  "explorer.file.root.template": "[icon] [title] [git & 1][hidden & 1][root]",
   "explorer.icon.enableNerdfont": true,
-  "explorer.previewAction.onHover": false
+  "explorer.icon.enableVimDevicons": true
 }
