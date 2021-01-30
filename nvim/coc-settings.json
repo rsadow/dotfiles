@@ -61,13 +61,6 @@
 
   "list.source.grep.command": "rg",
 
-  "git.signOffset": 9999999,
-  "git.topRemovedSign.text": "▌",
-  "git.changeRemovedSign.text": "▌",
-  "git.removedSign.text": "▌",
-  "git.addedSign.text": "▌",
-  "git.changedSign.text": "▌",
-
   "python.autoComplete.addBrackets": true,
   "python.jediEnabled": false,
   "html.autoClosingTags": true,

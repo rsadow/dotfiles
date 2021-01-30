@@ -1,53 +1,12 @@
-" ============= Vim-Plug ============== "{{{
-
-" auto-install vim-plug
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
-endif
-
-call plug#begin(expand('~/.config/nvim/plugged'))
-
-"}}}
-
-" ================= looks and GUI stuff ================== "{{{
-
-Plug 'vim-airline/vim-airline'                          " airline status bar
-Plug 'ryanoasis/vim-devicons'                           " pretty icons everywhere
-Plug 'luochen1990/rainbow'                              " rainbow parenthesis
-Plug 'hzchirs/vim-material'                             " material color themes
-Plug 'gregsexton/MatchTag'                              " highlight matching html tags
-Plug 'Jorengarenar/vim-MvVis'                           " move visual selection
-Plug 'arcticicestudio/nord-vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'joshdick/onedark.vim'
-Plug 'tomasiser/vim-code-dark'
-Plug 'morhetz/gruvbox'
-Plug 'bagrat/vim-buffet'
-Plug 'bfrg/vim-cpp-modern'
-Plug 'jackguo380/vim-lsp-cxx-highlight'
-Plug 'mhinz/vim-signify'
-"}}}
-
-" ================= Functionalities ================= "{{{
-" Plug 'liuchengxu/vim-which-key'
-Plug 'justinmk/vim-sneak'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}         " LSP and more
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }     " fzf itself
-Plug 'junegunn/fzf.vim'                                 " fuzzy search integration
-Plug 'mcchrish/nnn.vim'
-Plug 'voldikss/vim-floaterm'
-Plug 'tpope/vim-commentary'                             " better commenting
-Plug 'mhinz/vim-startify'                               " cool start up screen
-Plug 'psliwka/vim-smoothie'                             " some very smooth ass scrolling
-Plug 'christoomey/vim-tmux-navigator'                   " seamless vim and tmux navigation
-call plug#end()
-
-"}}}
-
-
-" ======================== Plugin Configurations ======================== "{{{
+"
+"
+" _____ __   _ _____ _______   _    _ _____ _______
+"   |   | \  |   |      |       \  /    |   |  |  |
+" __|__ |  \_| __|__    |    .   \/   __|__ |  |  |
+"
+"
+"
+sourc $HOME/.config/nvim/config/vim-plug/plugins.vim
 
 sourc $HOME/.config/nvim/config/general/settings.vim
 sourc $HOME/.config/nvim/config/general/functions.vim
