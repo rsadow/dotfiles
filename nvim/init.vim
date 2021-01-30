@@ -46,132 +46,19 @@ call plug#end()
 
 "}}}
 
-" ==================== general config ======================== "{{{
-
-set termguicolors                                       " Opaque Background
-set mouse=a                                             " enable mouse scrolling
-set clipboard+=unnamedplus                              " use system clipboard by default
-set tabstop=4 softtabstop=4 shiftwidth=4 autoindent     " tab width
-set expandtab smarttab                                  " tab key actions
-set incsearch ignorecase smartcase hlsearch             " highlight text while searching
-set list listchars=trail:»,tab:»-                       " use tab to navigate in list mode
-set fillchars+=vert:\▏                                  " requires a patched nerd font (try FiraCode)
-set wrap breakindent                                    " wrap long lines to the width set by tw
-set encoding=utf-8                                      " text encoding
-set number                                              " enable numbers on the left
-set title                                               " tab title as file name
-set noshowmode                                          " dont show current mode below statusline
-set noshowcmd                                           " to get rid of display of last command
-set conceallevel=2                                      " set this so we wont break indentation plugin
-set splitright                                          " open vertical split to the right
-set splitbelow                                          " open horizontal split to the bottom
-set tw=120                                              " auto wrap lines that are longer than that
-set emoji                                               " enable emojis
-set history=1000                                        " history limit
-set backspace=indent,eol,start                          " sensible backspacing
-set undofile                                            " enable persistent undo
-set undodir=/tmp                                        " undo temp file directory
-set foldlevel=0                                         " open all folds by default
-set inccommand=nosplit                                  " visual feedback while substituting
-set showtabline=2                                       " always show tabline
-set grepprg=rg\ --vimgrep                               " use rg as default grepper
-set noswapfile
-
-" performance tweaks
-set nocursorline
-set nocursorcolumn
-set scrolljump=5
-set lazyredraw
-set redrawtime=10000
-set synmaxcol=180
-set re=1
-
-" required by coc
-set hidden
-set nobackup
-set nowritebackup
-set cmdheight=1
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
-
-" Themeing
-function! s:ReturnHighlightTerm(group, term)
-   let output = execute('hi ' . a:group)
-
-   return matchstr(output, a:term.'=\zs\S*')
-endfunction
-
-function! s:setHi(group, item, value)
-    if a:value != ""
-        exec "hi " . a:group . " " . a:item . "=" . a:value
-    endif
-endfunction
-
-function! s:hi(group, guifg, guibg, attr)
-    call s:setHi(a:group, 'guifg', s:ReturnHighlightTerm(a:group, 'guifg'))
-    call s:setHi(a:group, 'guibg', s:ReturnHighlightTerm(a:group, 'guibg'))
-    if a:guifg != ""
-        call s:setHi(a:group, 'guifg', a:guifg)
-    endif
-    if a:guibg != ""
-        call s:setHi(a:group, 'guibg', a:guibg)
-    endif
-    if a:attr != ""
-        call s:setHi(a:group, 'gui', a:attr)
-    endif
-endfunction
-
-
-let s:bg = '#282d37'
-
-" colorscheme dracula
-colorscheme nord
-call s:hi('Comment', '', '', 'italic')
-call s:hi('SpellBad', 'NONE', '', 'bold,undercurl')
-call s:hi('EndOfBuffer', s:bg, '', '')
-call s:hi('Normal', '', s:bg, 'NONE' )
-call s:hi('DiffAdd', '', s:bg,'')
-call s:hi('DiffChange', '', s:bg, '')
-call s:hi('DiffDelete', '', s:bg, '')
-call s:hi('DiffText', '', s:bg, '')
-call s:hi('FoldColumn', '', s:bg, '')
-call s:hi('SignColumn', '', s:bg, '')
-call s:hi('VertSplit', '', s:bg, '')
-silent! call s:hi('LspCxxHlSymClass', g:terminal_color_4, '', 'bold')
-silent! call s:hi('LspCxxHlSymNamespace', g:terminal_color_14, '', '')
-
-let g:signify_sign_show_count = 0
-"}}}
 
 " ======================== Plugin Configurations ======================== "{{{
 
-"" built in plugins
-let loaded_netrw = 0                                    " diable netew
-let g:omni_sql_no_default_maps = 1                      " disable sql omni completion
-let g:loaded_python_provider = 0
-let g:loaded_perl_provider = 0
-let g:loaded_ruby_provider = 0
-let g:python3_host_prog = !empty($CUSTOM_PYTHON3) ? expand($CUSTOM_PYTHON3) : expand('/usr/bin/python3')
+sourc $HOME/.config/nvim/config/general/settings.vim
+sourc $HOME/.config/nvim/config/general/functions.vim
 
-" Airline
-" let g:airline_theme='onedar '
-let g:airline_skip_empty_sections = 1
-let g:airline_section_warning = ''
-let g:airline_section_x=''
-let g:airline_section_z = airline#section#create(['%3p%% ', 'linenr', ':%c'])
-let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_min_count = 2   " show tabline only if there is more than 1 buffer
-let g:airline#extensions#tabline#fnamemod = ':t'        " show only file name on tabs
-let airline#extensions#coc#error_symbol = '✘:'
-let airline#extensions#coc#warning_symbol = '⚠:'
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.linenr = ''
-let g:airline_symbols.branch = '⎇ '
-let g:airline_symbols.dirty= ''
+sourc $HOME/.config/nvim/config/themes/common.vim
+sourc $HOME/.config/nvim/config/themes/nord.vim
+
+sourc $HOME/.config/nvim/config/plug-config/vim-airline.vim
+sourc $HOME/.config/nvim/config/plug-config/vim-startify.vim
+sourc $HOME/.config/nvim/config/plug-config/fzf.vim
+sourc $HOME/.config/nvim/config/plug-config/vim-signify.vim
 
 "" coc
 
@@ -201,88 +88,14 @@ let g:coc_global_extensions = [
             \'coc-pyright'
             \]
 
-" indentLine
-let g:indentLine_char_list = ['▏', '¦', '┆', '┊']
-let g:indentLine_setColors = 0
-let g:indentLine_setConceal = 0                         " actually fix the annoying markdown links conversion
-let g:indentLine_fileTypeExclude = ['startify']
-
-"" startify
-let g:startify_padding_left = 10
-let g:startify_session_persistence = 1
-let g:startify_enable_special = 0
-let g:startify_change_to_vcs_root = 1
-let g:startify_lists = [
-    \ { 'type': 'dir'       },
-    \ { 'type': 'files'     },
-    \ { 'type': 'sessions'  },
-    \ { 'type': 'bookmarks' },
-    \ { 'type': 'commands' },
-    \ ]
-
-let g:startify_lists = [
-            \ { 'type': 'files',     'header': ['   MRU']            },
-            \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-            \ { 'type': 'sessions',  'header': ['   Sessions']       },
-            \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-            \ { 'type': 'commands',  'header': ['   Commands']       },
-            \ ]
-
-" bookmark examples
-let  g:startify_bookmarks =  [
-    \ {'v': '~/.config/nvim/init.vim'},
-    \ {'d': '~/.config/nvim/' }
-    \ ]
-
-" custom commands
-let g:startify_commands = [
-    \ {'ch':  ['Health Check', ':checkhealth']},
-    \ {'ps': ['Plugins status', ':PlugStatus']},
-    \ {'pu': ['Update vim plugins',':PlugUpdate | PlugUpgrade']},
-    \ {'uc': ['Update coc Plugins', ':CocUpdate']},
-    \ {'h':  ['Help', ':help']},
-    \ ]
-
-" custom banner
-"let g:startify_custom_header = [
-" \ '',
-" \ '                                                    ▟▙            ',
-" \ '                                                    ▝▘            ',
-" \ '            ██▃▅▇█▆▖  ▗▟████▙▖   ▄████▄   ██▄  ▄██  ██  ▗▟█▆▄▄▆█▙▖',
-" \ '            ██▛▔ ▝██  ██▄▄▄▄██  ██▛▔▔▜██  ▝██  ██▘  ██  ██▛▜██▛▜██',
-" \ '            ██    ██  ██▀▀▀▀▀▘  ██▖  ▗██   ▜█▙▟█▛   ██  ██  ██  ██',
-" \ '            ██    ██  ▜█▙▄▄▄▟▊  ▀██▙▟██▀   ▝████▘   ██  ██  ██  ██',
-" \ '            ▀▀    ▀▀   ▝▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀  ▀▀  ▀▀  ▀▀',
-" \ '',
-" \ '',
-" \ '',
-" \]
-
-let g:startify_custom_header = 'map(startify#fortune#boxed(), "repeat(\" \", 5).v:val")'
-
-" rainbow brackets
-let g:rainbow_active = 0
 
 " tmux navigator
 let g:tmux_navigator_no_mappings = 1
 
-"" FZF
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.90, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'rounded' } }
-let g:fzf_tags_command = 'ctags -R'
-
-let $FZF_DEFAULT_OPTS ="--layout=reverse --inline-info --preview-window=up:70% --prompt='∼ ' --pointer='▶' --marker='✓'
-    \ --color='border:". g:terminal_color_0 . ",bg+:". s:bg . ",pointer:". g:terminal_color_9 ."'"
-let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!.clangd/**' --glob '!**/cmake-build**/**' --glob '!**/bin/**'"
 
 " nnn
 let g:nnn#layout = { 'window': { 'width': 0.3, 'height': 0.7 } }
 
-let g:fzf_preview_use_dev_icons = 1
 
 
 let g:cpp_attributes_highlight = 1
@@ -340,25 +153,11 @@ command! -nargs=0 Format :call CocAction('format')
 " organize imports
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
-" files in fzf
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--inline-info']}), <bang>0)
-
-" advanced grep
-command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
 
 "}}}
 
 " ================== Custom Functions ===================== "{{{
 
-" advanced grep(faster with preview)
-function! RipgrepFzf(query, fullscreen)
-    let command_fmt = "rg --column --line-number --no-heading --color=always --smart-case %s || true "
-    let initial_command = printf(command_fmt, shellescape(a:query))
-    let reload_command = printf(command_fmt, '{q}')
-    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command] }
-    call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
 
 " startify file icons
 function! StartifyEntryFormat()

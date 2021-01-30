@@ -56,4 +56,5 @@ print "$cmd" "+ setup symlinks"
 #setup nvim
 ln -sf "$DOTFILES"/nvim/init.vim "$HOME"/.config/nvim/init.vim
 ln -sf "$DOTFILES"/nvim/coc-settings.json "$HOME"/.config/nvim/coc-settings.json
+ln -sf "$DOTFILES"/nvim/config "$HOME"/.config/nvim/config
 
