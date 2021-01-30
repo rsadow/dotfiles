@@ -53,3 +53,44 @@ let g:loaded_python_provider = 0
 let g:loaded_perl_provider = 0
 let g:loaded_ruby_provider = 0
 let g:python3_host_prog = !empty($CUSTOM_PYTHON3) ? expand($CUSTOM_PYTHON3) : expand('/usr/bin/python3')
+
+
+" COMMANDS
+
+let spellable = ['markdown', 'gitcommit', 'txt', 'text', 'liquid', 'rst']
+au BufEnter * if index(spellable, &ft) < 0 | set nospell | else | set spell | endif
+au BufEnter * set fo-=c fo-=r fo-=o                     " stop annoying auto commenting on new lines
+au FileType help wincmd L                               " open help in vertical split
+au BufWritePre * :%s/\s\+$//e                           " remove trailing whitespaces before saving
+au BufReadPost *                                        " Return to last edit position when opening files
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+
+
+
+" == TEMP =============================================
+
+" nnn
+let g:nnn#layout = { 'window': { 'width': 0.3, 'height': 0.7 } }
+
+
+" markdown preview
+au FileType markdown nmap <leader>m :MarkdownPreview<CR>
+
+" which-key
+" nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+" let g:which_key_use_floating_win = 0
+" " let g:which_key_disable_default_offset = 1
+
+" highlight default link WhichKey          Number
+" highlight default link WhichKeySeperator String
+" highlight default link WhichKeyGroup     Identifier
+" highlight default link WhichKeyDesc      Function
+
+" " autocmd! FileType which_key
+" " autocmd  FileType which_key set laststatus=0 noshowmode noruler
+" "   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode rule
+" let g:which_key_map =  {}
+" let g:which_key_sep = '→'
+" set timeoutlen=500
