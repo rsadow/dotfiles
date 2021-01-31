@@ -6,19 +6,23 @@
 "
 "
 "
-sourc $HOME/.config/nvim/config/vim-plug/plugins.vim
+source $HOME/.config/nvim/config/vim-plug/plugins.vim
 
-sourc $HOME/.config/nvim/config/general/settings.vim
-sourc $HOME/.config/nvim/config/general/functions.vim
+source $HOME/.config/nvim/config/general/settings.vim
+source $HOME/.config/nvim/config/general/functions.vim
 
-sourc $HOME/.config/nvim/config/themes/common.vim
-sourc $HOME/.config/nvim/config/themes/nord.vim
+source $HOME/.config/nvim/config/themes/common.vim
+source $HOME/.config/nvim/config/themes/nord.vim
 
-sourc $HOME/.config/nvim/config/plug-config/fzf.vim
-sourc $HOME/.config/nvim/config/plug-config/vim-airline.vim
-sourc $HOME/.config/nvim/config/plug-config/vim-floaterm.vim
-sourc $HOME/.config/nvim/config/plug-config/vim-signify.vim
-sourc $HOME/.config/nvim/config/plug-config/vim-sneak.vim
-sourc $HOME/.config/nvim/config/plug-config/vim-startify.vim
+source $HOME/.config/nvim/config/keys/mappings.vim
 
-sourc $HOME/.config/nvim/config/plug-config/coc/coc.vim
+source $HOME/.config/nvim/config/plug-config/fzf.vim
+source $HOME/.config/nvim/config/plug-config/vim-airline.vim
+source $HOME/.config/nvim/config/plug-config/vim-floaterm.vim
+source $HOME/.config/nvim/config/plug-config/vim-signify.vim
+source $HOME/.config/nvim/config/plug-config/vim-sneak.vim
+source $HOME/.config/nvim/config/plug-config/vim-startify.vim
+
+source $HOME/.config/nvim/config/plug-config/coc/coc.vim
+
+

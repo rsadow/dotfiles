@@ -2,6 +2,7 @@
 let g:airline_skip_empty_sections = 1
 let g:airline_section_warning = ''
 let g:airline_section_x=''
+let g:airline_section_c='[%{pathshorten(getcwd())}] %t'
 let g:airline_section_z = airline#section#create(['%3p%% ', 'linenr', ':%c'])
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline#extensions#tabline#enabled = 1
@@ -13,5 +14,13 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.linenr = ''
-let g:airline_symbols.branch = '⎇ '
+let g:airline_symbols.branch = ''
 let g:airline_symbols.dirty= ''
+
+function! CondensedPath() abort
+    if expand(':h') == '/'
+        return '/' . expand('%:t')
+    else
+        return pathshorten(expand('%:h')) . '/' . expand('%:t')
+    endif
+endfunction
