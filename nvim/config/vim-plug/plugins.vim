@@ -32,4 +32,6 @@ call plug#begin(expand('~/.config/nvim/plugged'))
     Plug 'vim-airline/vim-airline'                          " airline status bar
     Plug 'voldikss/vim-floaterm'
     Plug 'tpope/vim-fugitive'
+    Plug 'zefei/vim-colortuner'
 call plug#end()
+

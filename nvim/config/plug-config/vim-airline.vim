@@ -1,8 +1,7 @@
 " let g:airline_theme='onedar '
 let g:airline_skip_empty_sections = 1
 let g:airline_section_warning = ''
-let g:airline_section_x=''
-let g:airline_section_c='[%{pathshorten(getcwd())}] %t'
+let g:airline_section_x='[%{pathshorten(getcwd())}]'
 let g:airline_section_z = airline#section#create(['%3p%% ', 'linenr', ':%c'])
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline#extensions#tabline#enabled = 1

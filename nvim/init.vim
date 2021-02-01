@@ -26,3 +26,4 @@ source $HOME/.config/nvim/config/plug-config/vim-startify.vim
 source $HOME/.config/nvim/config/plug-config/coc/coc.vim
 
 
+g:colortuner_preferred_schemes = ['nord']

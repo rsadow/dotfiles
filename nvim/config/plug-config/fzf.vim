@@ -11,13 +11,13 @@ let $FZF_DEFAULT_OPTS ="--layout=reverse --inline-info --preview-window=up:70% -
     \ --color='border:". g:terminal_color_0 . ",bg+:". g:rs_custom_bg . ",pointer:". g:terminal_color_9 ."'"
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden
             \ --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea'
-            \ --glob '!.clangd/**' --glob '!**/cmake-build**/**' --glob '!**/bin/**'"
+            \ --glob '!.clangd/**' --glob '!**/cmake-build**/**' --glob '!bin/**'"
 
 " == FUNCTIONS ====================================================
 
 " advanced grep(faster with preview)
 function! RipgrepFzf(query, fullscreen)
-    let command_fmt = "rg --column --line-number --no-heading --color=always --smart-case %s || true "
+    let command_fmt = "rg --column --line-number --no-heading --glob '!bin/**' --color=always --smart-case %s || true "
     let initial_command = printf(command_fmt, shellescape(a:query))
     let reload_command = printf(command_fmt, '{q}')
     let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command] }
