@@ -51,10 +51,14 @@ install_cmd "lazygit" \
     "sudo -E apt-get -y update" \
     "sudo -E apt-get -y install lazygit" \
 
+install_cmd "tmux" \
+    "sudo -E apt-get -y install tmux" \
+
 print "$cmd" "+ setup symlinks"
 
 #setup nvim
 ln -sf "$DOTFILES"/nvim/init.vim "$HOME"/.config/nvim/init.vim
 ln -sf "$DOTFILES"/nvim/coc-settings.json "$HOME"/.config/nvim/coc-settings.json
 ln -sf "$DOTFILES"/nvim/config "$HOME"/.config/nvim/config
+ln -sf "$DOTFILES"/tmux/tmux.conf "$HOME"/.tmux.conf
 
