@@ -11,8 +11,8 @@ function! s:setHi(group, item, value)
 endfunction
 
 function! g:Hi(group, guifg, guibg, attr)
-    call s:setHi(a:group, 'guifg', g:ReturnHighlightTerm(a:group, 'guifg'))
-    call s:setHi(a:group, 'guibg', g:ReturnHighlightTerm(a:group, 'guibg'))
+    " call s:setHi(a:group, 'guifg', g:ReturnHighlightTerm(a:group, 'guifg'))
+    " call s:setHi(a:group, 'guibg', g:ReturnHighlightTerm(a:group, 'guibg'))
     if a:guifg != ""
         call s:setHi(a:group, 'guifg', a:guifg)
     endif

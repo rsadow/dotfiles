@@ -33,5 +33,6 @@ call plug#begin(expand('~/.config/nvim/plugged'))
     Plug 'voldikss/vim-floaterm'
     Plug 'tpope/vim-fugitive'
     Plug 'zefei/vim-colortuner'
+    Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 

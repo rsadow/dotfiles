@@ -13,6 +13,7 @@ source $HOME/.config/nvim/config/general/functions.vim
 
 source $HOME/.config/nvim/config/themes/common.vim
 source $HOME/.config/nvim/config/themes/nord.vim
+" source $HOME/.config/nvim/config/themes/dracula.vim
 
 source $HOME/.config/nvim/config/keys/mappings.vim
 
@@ -25,5 +26,3 @@ source $HOME/.config/nvim/config/plug-config/vim-startify.vim
 
 source $HOME/.config/nvim/config/plug-config/coc/coc.vim
 
-
-g:colortuner_preferred_schemes = ['nord']

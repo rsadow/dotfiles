@@ -8,7 +8,7 @@ let g:fzf_tags_command = 'ctags -R'
 let g:fzf_preview_use_dev_icons = 1
 
 let $FZF_DEFAULT_OPTS ="--layout=reverse --inline-info --preview-window=up:70% --prompt='∼ ' --pointer='▶' --marker='✓'
-    \ --color='border:". g:terminal_color_0 . ",bg+:". g:rs_custom_bg . ",pointer:". g:terminal_color_9 ."'"
+    \ --color='border:". g:terminal_color_0 . ",bg+:". ReturnHighlightTerm('Normal', 'guibg') . ",pointer:". g:terminal_color_9 ."'"
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden
             \ --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea'
             \ --glob '!.clangd/**' --glob '!**/cmake-build**/**' --glob '!bin/**'"
