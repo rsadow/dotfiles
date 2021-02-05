@@ -60,5 +60,6 @@ print "$cmd" "+ setup symlinks"
 ln -sf "$DOTFILES"/nvim/init.vim "$HOME"/.config/nvim/init.vim
 ln -sf "$DOTFILES"/nvim/coc-settings.json "$HOME"/.config/nvim/coc-settings.json
 ln -sf "$DOTFILES"/nvim/config "$HOME"/.config/nvim/config
+#setup tmux
 ln -sf "$DOTFILES"/tmux/tmux.conf "$HOME"/.tmux.conf
 

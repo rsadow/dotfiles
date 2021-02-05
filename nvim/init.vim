@@ -23,6 +23,7 @@ source $HOME/.config/nvim/config/plug-config/vim-floaterm.vim
 source $HOME/.config/nvim/config/plug-config/vim-signify.vim
 source $HOME/.config/nvim/config/plug-config/vim-sneak.vim
 source $HOME/.config/nvim/config/plug-config/vim-startify.vim
+source $HOME/.config/nvim/config/plug-config/vim-rooter.vim
 
 source $HOME/.config/nvim/config/plug-config/coc/coc.vim
 

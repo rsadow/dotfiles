@@ -44,6 +44,9 @@ augroup END
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--inline-info']}), <bang>0)
 
+command! -bang -nargs=? -complete=dir Buffers
+    \ call fzf#vim#buffers(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--inline-info']}), <bang>0)
+
 " advanced grep
 command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
 
@@ -54,7 +57,7 @@ nnoremap <silent> <leader>f :Files<CR>
 nmap <leader>b :Buffers<CR>
 nmap <leader>c :Commands<CR>
 nmap <leader>/ :Rg<CR>
-nmap <C-a> :Rg <C-R><C-W><CR>
+nmap <C-p> :Rg <C-R><C-W><CR>
 nmap <leader>gc :Commits<CR>
 nmap <leader>gs :GFiles?<CR>
 nmap <leader>sh :History/<CR>

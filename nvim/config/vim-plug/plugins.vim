@@ -34,5 +34,6 @@ call plug#begin(expand('~/.config/nvim/plugged'))
     Plug 'tpope/vim-fugitive'
     Plug 'zefei/vim-colortuner'
     Plug 'dracula/vim', { 'as': 'dracula' }
+    Plug 'airblade/vim-rooter'
 call plug#end()
 

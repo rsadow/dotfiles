@@ -38,8 +38,9 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " exit to notmal mode in terminal
-tnoremap <Esc> <C-\><C-n>
-tnoremap <M-[> <Esc>
+" TODO find diffrent keymap
+" tnoremap <Esc> <C-\><C-n>
+" tnoremap <M-[> <Esc>
 
 " disable hl with 2 esc
 noremap <silent><esc> <esc>:noh<CR><esc>
