@@ -66,7 +66,7 @@ au BufReadPost *                                        " Return to last edit po
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
-
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab " Yaml default indentation
 
 
 " == TEMP =============================================
