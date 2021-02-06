@@ -20,13 +20,12 @@ while test $# -gt 0; do
     esac
 done
 
-
 print() {
     echo "$1$2$(tput sgr0)"
 }
 
 run_cmd() {
-    print "$cmd" "   > $1"
+    print $cmd "   > $1"
     if [ $DEBUG -eq 1 ]; then
         $@
     else
@@ -56,34 +55,31 @@ install_lazygit() {
     run_cmd "sudo -E apt-get -y install lazygit"
 }
 
-install_cmd "lazygit" install_lazygit
-
-
-
 install_tmux() {
     VERSION=3.1c
-    # run_cmd "sudo -E apt install automake build-essential pkg-config libevent-dev libncurses-dev -y"
-    # run_cmd "wget https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz"
-    # run_cmd "tar xf tmux-${VERSION}.tar.gz"
-    # run_cmd "rm tmux-${VERSION}.tar.gz"
-    # run_cmd "cd tmux-${VERSION}"
-    # run_cmd "./configure"
-    # run_cmd "make -j$(nproc)"
-    # run_cmd "sudo make install"
-    # run_cmd "cd .."
-    # run_cmd "sudo rm -rf /usr/local/src/tmux-*"
-    # run_cmd "sudo mv tmux-${VERSION} /usr/local/src"
+    run_cmd "sudo -E apt install automake build-essential pkg-config libevent-dev libncurses-dev -y"
+    run_cmd "wget https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz"
+    run_cmd "tar xf tmux-${VERSION}.tar.gz"
+    run_cmd "rm tmux-${VERSION}.tar.gz"
+    run_cmd "cd tmux-${VERSION}"
+    run_cmd "./configure"
+    run_cmd "make -j$(nproc)"
+    run_cmd "sudo make install"
+    run_cmd "cd .."
+    run_cmd "sudo rm -rf /usr/local/src/tmux-*"
+    run_cmd "sudo mv tmux-${VERSION} /usr/local/src"
 
-    run_cmd "git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
+    # plugin manager
+    run_cmd "git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm"
 
+    # .tmux.conf symlink
     ln -sf "$DOTFILES"/tmux/tmux.conf "$HOME"/.tmux.conf
 }
 
-install_cmd "tmuxs" install_tmux
+install_cmd "lazygit" install_lazygit
+install_cmd "tmux" install_tmux
 
 print "$cmd" "+setup symlinks"
-
-exit
 
 #setup nvim
 ln -sf "$DOTFILES"/nvim/init.vim "$HOME"/.config/nvim/init.vim
