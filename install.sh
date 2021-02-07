@@ -48,6 +48,13 @@ install_cmd() {
 
 print "$cmd" "+install programs"
 
+initialize() {
+    run_cmd "sudo -E apt -y update"
+}
+
+install_git() {
+    run_cmd "sudo -E apt-get -y install git"
+}
 
 install_lazygit() {
     run_cmd "sudo -E add-apt-repository -y ppa:lazygit-team/release"
@@ -76,6 +83,9 @@ install_tmux() {
     ln -sf "$DOTFILES"/tmux/tmux.conf "$HOME"/.tmux.conf
 }
 
+initialize
+
+install_cmd "git" install_git
 install_cmd "lazygit" install_lazygit
 install_cmd "tmux" install_tmux
 
