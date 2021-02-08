@@ -45,11 +45,28 @@ install_cmd() {
     print $success " $1: installed"
 }
 
+symlink_cmd() {
+    if [ ! -L $2 ]; then
+        ln -sf $1 $2
+        print $cmd "   > $2"
+    else
+        print $success " $2: installed"
+    fi
+}
+
 
 print "$cmd" "+install programs"
 
 initialize() {
     run_cmd "sudo -E apt -y update"
+}
+
+install_zsh() {
+    run_cmd "sudo -E apt-get -y install zsh"
+
+    if [ ! -d $HOME/.zgen/.git ]; then
+        run_cmd "git clone https://github.com/tarjoilija/zgen.git ${HOME}/.zgen"
+    fi
 }
 
 install_git() {
@@ -79,12 +96,11 @@ install_tmux() {
     # plugin manager
     run_cmd "git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm"
 
-    # .tmux.conf symlink
-    ln -sf "$DOTFILES"/tmux/tmux.conf "$HOME"/.tmux.conf
 }
 
-initialize
+# initialize
 
+install_cmd "zsh" install_zsh
 install_cmd "git" install_git
 install_cmd "lazygit" install_lazygit
 install_cmd "tmux" install_tmux
@@ -92,8 +108,12 @@ install_cmd "tmux" install_tmux
 print "$cmd" "+setup symlinks"
 
 #setup nvim
-ln -sf "$DOTFILES"/nvim/init.vim "$HOME"/.config/nvim/init.vim
-ln -sf "$DOTFILES"/nvim/coc-settings.json "$HOME"/.config/nvim/coc-settings.json
-ln -sf "$DOTFILES"/nvim/config "$HOME"/.config/nvim/config
+symlink_cmd "$DOTFILES"/nvim/init.vim "$HOME"/.config/nvim/init.vim
+symlink_cmd "$DOTFILES"/nvim/coc-settings.json "$HOME"/.config/nvim/coc-settings.json
+symlink_cmd "$DOTFILES"/nvim/config "$HOME"/.config/nvim/config
 
+#setup zsh
+symlink_cmd "$DOTFILES"/zsh/.zshrc "$HOME"/.zshrc
 
+# .tmux.conf symlink
+symlink_cmd "$DOTFILES"/tmux/tmux.conf "$HOME"/.tmux.conf
