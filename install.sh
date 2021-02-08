@@ -79,6 +79,12 @@ install_lazygit() {
     run_cmd "sudo -E apt-get -y install lazygit"
 }
 
+install_neovim() {
+    run_cmd "sudo -E add-apt-repository -y ppa:neovim-ppa/stable"
+    run_cmd "sudo -E apt-get -y update"
+    run_cmd "sudo -E apt-get -y install neovim"
+}
+
 install_tmux() {
     VERSION=3.1c
     run_cmd "sudo -E apt install automake build-essential pkg-config libevent-dev libncurses-dev -y"
@@ -104,6 +110,7 @@ install_cmd "zsh" install_zsh
 install_cmd "git" install_git
 install_cmd "lazygit" install_lazygit
 install_cmd "tmux" install_tmux
+install_cmd "neovim" install_neovim
 
 print "$cmd" "+setup symlinks"
 
