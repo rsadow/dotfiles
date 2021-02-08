@@ -69,9 +69,14 @@ initialize() {
 install_zsh() {
     run_cmd "sudo -E apt-get -y install zsh"
 
-    if [ ! -d $HOME/.zgen/.git ]; then
-        run_cmd "git clone https://github.com/tarjoilija/zgen.git ${HOME}/.zgen"
+}
+
+post_install_zsh() {
+    if [ ! -d $HOME/.config/antigen/.git ]; then
+        run_cmd "git clone https://github.com/zsh-users/antigen.git ${HOME}/.config/antigen"
     fi
+
+    symlink_cmd "$DOTFILES"/zsh/.zshrc "$HOME"/.zshrc
 }
 
 install_git() {
@@ -123,16 +128,14 @@ install_tmux() {
 
 # initialize
 
-install_cmd "zsh" install_zsh
 install_cmd "git" install_git
+install_cmd "zsh" install_zsh post_install_zsh
 install_cmd "lazygit" install_lazygit
 install_cmd "tmux" install_tmux
 install_cmd "nvim" install_neovim post_install_neovim
 
 print "$cmd" "+setup symlinks"
 
-#setup zsh
-symlink_cmd "$DOTFILES"/zsh/.zshrc "$HOME"/.zshrc
 
 # .tmux.conf symlink
 symlink_cmd "$DOTFILES"/tmux/tmux.conf "$HOME"/.tmux.conf
