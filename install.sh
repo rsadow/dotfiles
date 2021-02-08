@@ -43,6 +43,11 @@ install_cmd() {
         $2
     fi
     print $success " $1: installed"
+
+    if [ $# -eq 3 ]; then
+        print $cmd " $1: post-install"
+        $3
+    fi
 }
 
 symlink_cmd() {
@@ -85,6 +90,17 @@ install_neovim() {
     run_cmd "sudo -E apt-get -y install neovim"
 }
 
+post_install_neovim() {
+    NEOVIM_CONFIG="$HOME/.config/nvim"
+    if [ ! -e $NEOVIM_CONFIG ]; then
+        run_cmd "mkdir -p $NEOVIM_CONFIG"
+    fi
+
+    symlink_cmd "$DOTFILES"/nvim/init.vim "$HOME"/.config/nvim/init.vim
+    symlink_cmd "$DOTFILES"/nvim/coc-settings.json "$HOME"/.config/nvim/coc-settings.json
+    symlink_cmd "$DOTFILES"/nvim/config "$HOME"/.config/nvim/config
+}
+
 install_tmux() {
     VERSION=3.1c
     run_cmd "sudo -E apt install automake build-essential pkg-config libevent-dev libncurses-dev -y"
@@ -104,20 +120,16 @@ install_tmux() {
 
 }
 
+
 # initialize
 
 install_cmd "zsh" install_zsh
 install_cmd "git" install_git
 install_cmd "lazygit" install_lazygit
 install_cmd "tmux" install_tmux
-install_cmd "neovim" install_neovim
+install_cmd "nvim" install_neovim post_install_neovim
 
 print "$cmd" "+setup symlinks"
-
-#setup nvim
-symlink_cmd "$DOTFILES"/nvim/init.vim "$HOME"/.config/nvim/init.vim
-symlink_cmd "$DOTFILES"/nvim/coc-settings.json "$HOME"/.config/nvim/coc-settings.json
-symlink_cmd "$DOTFILES"/nvim/config "$HOME"/.config/nvim/config
 
 #setup zsh
 symlink_cmd "$DOTFILES"/zsh/.zshrc "$HOME"/.zshrc
