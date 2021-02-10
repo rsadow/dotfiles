@@ -72,8 +72,8 @@ install_zsh() {
 }
 
 post_install_zsh() {
-    if [ ! -d $HOME/.config/antigen/.git ]; then
-        run_cmd "git clone https://github.com/zsh-users/antigen.git ${HOME}/.config/antigen"
+    if [ ! -d $HOME/.zgen/.git ]; then
+        run_cmd "git clone https://github.com/tarjoilija/zgen.git ${HOME}/.zgen"
     fi
 
     symlink_cmd "$DOTFILES"/zsh/.zshrc "$HOME"/.zshrc
@@ -123,6 +123,7 @@ install_tmux() {
     # plugin manager
     run_cmd "git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm"
 
+    symlink_cmd "$DOTFILES"/tmux/tmux.conf "$HOME"/.tmux.conf
 }
 
 
@@ -134,8 +135,4 @@ install_cmd "lazygit" install_lazygit
 install_cmd "tmux" install_tmux
 install_cmd "nvim" install_neovim post_install_neovim
 
-print "$cmd" "+setup symlinks"
 
-
-# .tmux.conf symlink
-symlink_cmd "$DOTFILES"/tmux/tmux.conf "$HOME"/.tmux.conf

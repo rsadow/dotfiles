@@ -1,4 +1,4 @@
-source "${HOME}/.config/zsh/zgen/zgen.zsh"
+source "${HOME}/.zgen/zgen.zsh"
 
 if ! zgen saved; then
 
@@ -6,20 +6,22 @@ if ! zgen saved; then
     zgen prezto '*:*' color 'yes'
     zgen prezto autosuggestions color 'yes'
     zgen prezto prompt theme 'pure'
+    zgen prezto history-substring-search:color found 'green'
 
     zgen prezto
 
+    zgen prezto utility
     zgen prezto history
     zgen prezto completion
     zgen prezto syntax-highlighting
+    zgen prezto history-substring-search
     zgen prezto directory
-    zgen prezto utility
     zgen prezto environment
     zgen prezto terminal
     zgen prezto autosuggestions
     zgen prezto prompt
 
-    zgen load denysdovhan/spaceship-prompt spaceship
+    # zgen load denysdovhan/spaceship-prompt spaceship
 
     zgen save
 fi
