@@ -2,8 +2,11 @@ source "${HOME}/.config/zsh/zgen/zgen.zsh"
 
 if ! zgen saved; then
 
+    export ZGEN_PREZTO_LOAD_DEFAULT=0
     zgen prezto '*:*' color 'yes'
     zgen prezto autosuggestions color 'yes'
+    zgen prezto prompt theme 'pure'
+
     zgen prezto
 
     zgen prezto history
@@ -14,6 +17,7 @@ if ! zgen saved; then
     zgen prezto environment
     zgen prezto terminal
     zgen prezto autosuggestions
+    zgen prezto prompt
 
     zgen load denysdovhan/spaceship-prompt spaceship
 
