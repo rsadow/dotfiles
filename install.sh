@@ -5,6 +5,8 @@ DOTFILES="$HOME/.dotfiles"
 success=`tput setaf 3`
 error=`tput setaf 1`
 cmd=`tput setaf 6`
+primary=`tput setaf 5`
+reset=`tput sgr0`
 
 DEBUG=0
 
@@ -24,6 +26,11 @@ print() {
     echo "$1$2$(tput sgr0)"
 }
 
+#
+print_cmd() {
+    echo "$1$primary$2$reset: $3$reset"
+}
+
 run_cmd() {
     print $cmd "   > $1"
     if [ $DEBUG -eq 1 ]; then
@@ -39,13 +46,13 @@ run_cmd() {
 
 install_cmd() {
     if ! command -v $1 &> /dev/null; then
-        print $cmd " $1: installing"
+        print_cmd $cmd $1 "installing"
         $2
     fi
-    print $success " $1: installed"
+    print_cmd $success $1 "installed"
 
     if [ $# -eq 3 ]; then
-        print $cmd " $1: post-install"
+        print_cmd $cmd $1 "post-install"
         $3
     fi
 }
@@ -53,9 +60,9 @@ install_cmd() {
 symlink_cmd() {
     if [ ! -L $2 ]; then
         ln -sf $1 $2
-        print $cmd "   > $2"
+        print_ $cmd "   > $2"
     else
-        print $success " $2: installed"
+        print_cmd $success $2 "installed"
     fi
 }
 
@@ -81,6 +88,10 @@ post_install_zsh() {
 
 install_git() {
     run_cmd "sudo -E apt-get -y install git"
+}
+
+install_rg() {
+    run_cmd "sudo -E apt-get -y install ripgrep"
 }
 
 install_lazygit() {
@@ -134,5 +145,6 @@ install_cmd "zsh" install_zsh post_install_zsh
 install_cmd "lazygit" install_lazygit
 install_cmd "tmux" install_tmux
 install_cmd "nvim" install_neovim post_install_neovim
+install_cmd "rg" install_rg
 
 

@@ -7,6 +7,7 @@ if ! zgen saved; then
     zgen prezto autosuggestions color 'yes'
     zgen prezto prompt theme 'pure'
     zgen prezto history-substring-search:color found 'green'
+    zgen prezto editor key-bindings 'vi'
 
     zgen prezto
 
@@ -20,6 +21,7 @@ if ! zgen saved; then
     zgen prezto terminal
     zgen prezto autosuggestions
     zgen prezto prompt
+    zgen prezto editor
 
     # zgen load denysdovhan/spaceship-prompt spaceship
 
